@@ -1,0 +1,23 @@
+const API_KEY = '44022186-1b27698d00f0ef58470e0f06e';
+const BASE_URL = 'https://pixabay.com/api/';
+
+export const fetchPhotosQuery = query => {
+  const searchParams = new URLSearchParams({
+    key: API_KEY,
+    q: query,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: true,
+  });
+    
+
+  return fetch(`${BASE_URL}/?${searchParams}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+      return response.json();
+     
+  });
+}
+console.log(fetchPhotosQuery);
+
