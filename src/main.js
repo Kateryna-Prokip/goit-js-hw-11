@@ -1,5 +1,5 @@
-import { createMarkupItem } from './render-functions';
-import { fetchPhotosByQuery } from './pixabay-api';
+import { createMarkupItem } from './js/render-functions';
+import { fetchPhotosByQuery } from './js/pixabay-api';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -48,8 +48,8 @@ function onSearchFormSubmit(event) {
       loaderEl.classList.add('is-hidden');
     });
 
-  input.value = '';
-  form.reset();
+  // input.value = '';
+  // form.reset();
 }
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
