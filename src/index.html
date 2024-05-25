@@ -4,35 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>HW-11</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
   </head>
-  <body>
-    <main>
-      <!-- <section class="search-section"> -->
-        <div class="container">
-          <form class="search-form js-search-form" name="serchImageForm">
-            <div class="input-group mb-3">
-              <input
-                class="form-control js-search-input"
-                type="text"
-                name="searchKeyword"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Start
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
 
-      <section class="gallery">
-        <div class="container">
-          <ul class="gallery-list js-gallery"></ul>
-          <div class="loader js-loader is-hidden"></div>
-        </div>
-      </section>
-    </main>
+  <body>
+    <form class="search-form">
+      <input
+        type="text"
+        id="image"
+        name="image"
+        class="search-field"
+        placeholder="Search images..."
+      />
+      <button type="submit" data-search>Search</button>
+    </form>
+
+    <span class="loader"></span>
+
+    <ul class="gallery"></ul>
 
     <script type="module" src="./js/main.js"></script>
   </body>

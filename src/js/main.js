@@ -3,14 +3,16 @@ import { fetchPhotosByQuery } from './pixabay-api';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const galleryEl = document.querySelector('.js-gallery');
-const searchFormEl = document.querySelector('.js-search-form');
-const loaderEl = document.querySelector('.js-loader');
+const galleryEl = document.querySelector('.gallery');
+const searchFormEl = document.querySelector('.search-form');
+const loaderEl = document.querySelector('.loader');
+const searchField  = document.querySelector('.search-field')
 
 function onSearchFormSubmit(event) {
   event.preventDefault();
 
-  const searchQuery = event.target.elements.searchKeyword.value.trim();
+  const searchQuery = searchField.value.trim();
+    
   if (searchQuery === '') {
     galleryEl.innerHTML = '';
     event.target.reset();
@@ -20,6 +22,7 @@ function onSearchFormSubmit(event) {
       position: 'topRight',
       timeout: 2000,
     });
+    loader.style.display = 'none';
     return;
   }
   galleryEl.innerHTML = '';
@@ -44,6 +47,9 @@ function onSearchFormSubmit(event) {
       event.target.reset();
       loaderEl.classList.add('is-hidden');
     });
+
+  input.value = '';
+  form.reset();
 }
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);

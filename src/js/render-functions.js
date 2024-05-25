@@ -1,8 +1,5 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-export const createMarkupItem = images => {
-  return images
+export function createMarkupItem(arr) {
+  return arr
     .map(
       ({
         webformatURL,
@@ -12,31 +9,25 @@ export const createMarkupItem = images => {
         views,
         comments,
         downloads,
-      }) => {
-        return `
-  <li class="gallery-item">
-  <a class="gallery-link" href="${largeImageURL}">
-    <img
-      class="gallery-image"
-      src="${webformatURL}"
-      alt="${tags}"
-    />
-  </a>
-    <div class="small-content">
-        <small class="text-body-likes">Likes: ${likes}</small>
-        <small class="text-body-views">Views: ${views}</small>
-        <small class="text-body-comments">Comments: ${comments}</small>
-        <small class="text-body-downloads">Dowloads: ${downloads}</small>
-    </div>
- 
-    </li>s
-`;
-      }
+      }) =>
+        `<li class="gallery-item">
+          <a class="gallery-link" href="${largeImageURL}">
+            <img
+              class="gallery-image"
+              src="${webformatURL}"
+              alt="${tags}"
+              width = "360"
+              height = "200"
+            />
+            <ul class="image-info">
+              <li class="item-info">Likes <span>${likes}</span></li>
+              <li class="item-info">Views <span>${views}</span></li>
+              <li class="item-info">Comments <span>${comments}</span></li>
+              <li class="item-info">Downloads <span>${downloads}</span></li>
+            </ul>
+          </a>
+        </li>
+    `
     )
     .join('');
-};
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+}
