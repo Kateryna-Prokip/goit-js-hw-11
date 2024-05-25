@@ -1,50 +1,49 @@
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-import { fetchPhotosQuery } from "./pixabay-api.js";
-import { createMarkup } from './render-functions.js';
-fetchPhotosQuery().then(imagesData => { console.log(imagesData.results); });
+import { createMarkupItem } from './render-functions';
+import { fetchPhotosByQuery } from './pixabay-api';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
+const galleryEl = document.querySelector('.js-gallery');
+const searchFormEl = document.querySelector('.js-search-form');
+const loaderEl = document.querySelector('.js-loader');
 
-const imgContainer = document.querySelector('.gallery');
-const searchForm = document.querySelector('.form-search');
-const loaderEl = document.querySelector('.loader');
-
-function onSearch(event) {
+function onSearchFormSubmit(event) {
   event.preventDefault();
-  
+
   const searchQuery = event.target.elements.searchKeyword.value.trim();
-  imgContainer.innerHTML = '';
   if (searchQuery === '') {
-    return iziToast.error({
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
+    galleryEl.innerHTML = '';
+    event.target.reset();
+    iziToast.error({
+      title: 'Error',
+      message: 'Illegal operation',
+      position: 'topRight',
+      timeout: 2000,
     });
+    return;
   }
-  imgContainer.innerHTML = '';
+  galleryEl.innerHTML = '';
   loaderEl.classList.remove('is-hidden');
 
-  fetchPhotos(searchQuery)
+  fetchPhotosByQuery(searchQuery)
     .then(imagesData => {
-      if (imagesData.hits.length === 0) {
-        iziToast.error({
+      if (imagesData.totalHits === 0) {
+        iziToast.show({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topRight',
+          timeout: 2000,
+          color: 'red',
         });
       }
-      
-      imgContainer.innerHTML = createMarkup(imagesData.hits);
-      const lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionsDelay: 250,
-      });
-    
+      galleryEl.innerHTML = createMarkupItem(imagesData.hits);
     })
+
     .catch(error => console.log(error))
     .finally(() => {
       event.target.reset();
       loaderEl.classList.add('is-hidden');
     });
 }
-searchForm.addEventListener('submit', onSearch);
+
+searchFormEl.addEventListener('submit', onSearchFormSubmit);

@@ -1,7 +1,9 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 const API_KEY = '44022186-1b27698d00f0ef58470e0f06e';
 const BASE_URL = 'https://pixabay.com/api/';
 
-export const fetchPhotosQuery = query => {
+export const fetchPhotosByQuery = query => {
   const searchParams = new URLSearchParams({
     key: API_KEY,
     q: query,
@@ -9,15 +11,11 @@ export const fetchPhotosQuery = query => {
     orientation: 'horizontal',
     safesearch: true,
   });
-    
 
-  return fetch(`${BASE_URL}/?${searchParams}`).then(response => {
+  return fetch(`${BASE_URL}?${searchParams}`).then(response => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-      return response.json();
-     
+    return response.json();
   });
-}
-console.log(fetchPhotosQuery);
-
+};

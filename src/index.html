@@ -4,17 +4,35 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery project</title>
+    <title>Vanilla App Template</title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="./css/reset.css" />
   </head>
   <body>
-    <div class="form-search">
-      <input type="text" class="input-search" placeholder="Search images.." />
-      <button type="submit" class="btn-search">Search</button>
-    </div>
-    <ul class="gallery"></ul>
-    <span class="loader is-hidden"></span>
+    <main>
+      <!-- <section class="search-section"> -->
+        <div class="container">
+          <form class="search-form js-search-form" name="serchImageForm">
+            <div class="input-group mb-3">
+              <input
+                class="form-control js-search-input"
+                type="text"
+                name="searchKeyword"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Start
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="gallery">
+        <div class="container">
+          <ul class="gallery-list js-gallery"></ul>
+          <div class="loader js-loader is-hidden"></div>
+        </div>
+      </section>
+    </main>
 
     <script type="module" src="./js/main.js"></script>
   </body>

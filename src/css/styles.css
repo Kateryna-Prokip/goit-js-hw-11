@@ -25,12 +25,13 @@
 }
 
 
-.form-search {
+/* .form-search  */
+/* .search-section {
   margin-top: 24px;
   display: flex;
   justify-content: center;
   gap: 8px;
-}
+} */
 
 
 .input {
@@ -47,7 +48,14 @@
   height: 40px;
 }
 
-.gallery {}
+.container {
+  display: flex;
+  width: 1440px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
 
 .loader {
   width: 16px;

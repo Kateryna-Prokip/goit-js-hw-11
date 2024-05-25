@@ -1,37 +1,42 @@
-  export const createMarkup = images => {
-  return images.reduce(
-    (
-      html,
-      { tags, webformatURL, largeImageURL, likes, views, comments, downloads }
-    ) => {
-      return (
-        html +
-        `<li class="photo-container">
-    <a href=${largeImageURL} class="card-link js-card-link">
-        <img class="photo" src="${webformatURL}" alt="${tags}" >
-    </a>
-    <div class="info">
-        <div class="info-item">
-            <span class="title">Likes</span>
-            <span class="info">${likes}</span>
-        </div>
-        <div class="info-item">
-            <span class="title">Views</span>
-            <span class="info">${views}</span>
-        </div>
-        <div class="info-item">
-            <span class="title">Comments</span>
-            <span class="info">${comments}</span>
-        </div>
-        <div class="info-item">
-            <span class="title">Downloads</span>
-            <span class="info">${downloads}</span>
-        </div>
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+export const createMarkupItem = images => {
+  return images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `
+  <li class="gallery-item">
+  <a class="gallery-link" href="${largeImageURL}">
+    <img
+      class="gallery-image"
+      src="${webformatURL}"
+      alt="${tags}"
+    />
+  </a>
+    <div class="small-content">
+        <small class="text-body-likes">Likes: ${likes}</small>
+        <small class="text-body-views">Views: ${views}</small>
+        <small class="text-body-comments">Comments: ${comments}</small>
+        <small class="text-body-downloads">Dowloads: ${downloads}</small>
     </div>
-</li>
-    `
-      );
-    },
-    ''
-  );
+ 
+    </li>s
+`;
+      }
+    )
+    .join('');
 };
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
