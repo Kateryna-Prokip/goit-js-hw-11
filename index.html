@@ -4,21 +4,39 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/goit-js-hw-11/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery project</title>
-    
+    <title>Vanilla App Template</title>
     
     <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-8c59ed88.js">
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-1cd1f9d9.css">
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-f36aef53.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-0fc460d7.js">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-4b066c51.css">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-5b989dbb.css">
   </head>
   <body>
-    <div class="form-search">
-      <input type="text" class="input-search" placeholder="Search images.." />
-      <button type="submit" class="btn-search">Search</button>
-    </div>
-    <ul class="gallery"></ul>
-    <span class="loader is-hidden"></span>
+    <main>
+      <!-- <section class="search-section"> -->
+        <div class="container">
+          <form class="search-form js-search-form" name="serchImageForm">
+            <div class="input-group mb-3">
+              <input
+                class="form-control js-search-input"
+                type="text"
+                name="searchKeyword"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Start
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="gallery">
+        <div class="container">
+          <ul class="gallery-list js-gallery"></ul>
+          <div class="loader js-loader is-hidden"></div>
+        </div>
+      </section>
+    </main>
 
     
   </body>
