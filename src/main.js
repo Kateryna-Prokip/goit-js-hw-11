@@ -1,12 +1,21 @@
-import { createMarkupItem } from './js/render-functions';
-import { fetchPhotosByQuery } from './js/pixabay-api';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import { createMarkupItem } from './js/render-functions';
+import { fetchPhotosByQuery } from './js/pixabay-api';
+
+
 
 const galleryEl = document.querySelector('.gallery');
 const searchFormEl = document.querySelector('.search-form');
-const loaderEl = document.querySelector('.loader');
-const searchField  = document.querySelector('.search-field')
+const loader = document.querySelector('.loader');
+const searchField = document.querySelector('.search-field')
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 function onSearchFormSubmit(event) {
   event.preventDefault();
@@ -26,7 +35,7 @@ function onSearchFormSubmit(event) {
     return;
   }
   galleryEl.innerHTML = '';
-  loaderEl.classList.remove('is-hidden');
+  loader.classList.remove('is-hidden');
 
   fetchPhotosByQuery(searchQuery)
     .then(imagesData => {
@@ -38,18 +47,18 @@ function onSearchFormSubmit(event) {
           timeout: 2000,
           color: 'red',
         });
+      galleryEl.innerHTML = ''; // Очищаємо розмітку галереї
+      } else {
+        galleryEl.innerHTML = createMarkupItem(imagesData.hits);
+        lightbox.refresh(); // Оновлюємо екземпляр lightbox
       }
-      galleryEl.innerHTML = createMarkupItem(imagesData.hits);
-    })
+         })
 
     .catch(error => console.log(error))
     .finally(() => {
       event.target.reset();
-      loaderEl.classList.add('is-hidden');
+      loader.classList.add('is-hidden');
     });
-
-  // input.value = '';
-  // form.reset();
 }
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);

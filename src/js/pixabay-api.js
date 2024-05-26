@@ -1,5 +1,3 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 const API_KEY = '44022186-1b27698d00f0ef58470e0f06e';
 const BASE_URL = 'https://pixabay.com/api/';
 
